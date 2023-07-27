@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import './LoginPage.css';
+import React, { useState } from "react";
+import "./LoginPage.css";
 
 const LoginPage = ({ setCurrentPage }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -17,8 +17,8 @@ const LoginPage = ({ setCurrentPage }) => {
     e.preventDefault();
     // Here, you can add authentication logic
     // For now, let's just log the email and password
-    console.log('Email:', email);
-    console.log('Password:', password);
+    console.log("Email:", email);
+    console.log("Password:", password);
   };
 
   return (
@@ -43,10 +43,12 @@ const LoginPage = ({ setCurrentPage }) => {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" onClick={() => setCurrentPage("dashboard")}>
+          Login
+        </button>
         <p className="login-signup-link">
-          Don't have an account?{' '}
-          <span onClick={() => setCurrentPage('signup')}>Signup</span>
+          Don't have an account?{" "}
+          <span onClick={() => setCurrentPage("signup")}>Signup</span>
         </p>
       </form>
     </div>
