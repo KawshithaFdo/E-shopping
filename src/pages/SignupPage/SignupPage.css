@@ -1,6 +1,6 @@
 /* SignupPage.css */
 .signup-page-container {
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 20px;
   }
@@ -19,6 +19,7 @@
   
   .form-group {
     margin-bottom: 10px;
+    padding:10px;
   }
   
   .form-group label {

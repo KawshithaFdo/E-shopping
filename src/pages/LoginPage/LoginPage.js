@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
+import axios from "axios";
 
 const LoginPage = ({ setCurrentPage }) => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setUsername(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -15,10 +16,19 @@ const LoginPage = ({ setCurrentPage }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here, you can add authentication logic
-    // For now, let's just log the email and password
-    console.log("Email:", email);
-    console.log("Password:", password);
+  };
+
+  const login = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/user/login", {
+        username: username,
+        password: password,
+      });
+      setCurrentPage("dashboard");
+    } catch (error) {
+      alert(error);
+      console.error("Error fetching data:", error);
+    }
   };
 
   return (
@@ -26,10 +36,10 @@ const LoginPage = ({ setCurrentPage }) => {
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
         <div className="form-group">
-          <label>Email:</label>
+          <label>Username:</label>
           <input
-            type="email"
-            value={email}
+            type="username"
+            value={username}
             onChange={handleEmailChange}
             required
           />
@@ -43,7 +53,7 @@ const LoginPage = ({ setCurrentPage }) => {
             required
           />
         </div>
-        <button type="submit" onClick={() => setCurrentPage("dashboard")}>
+        <button type="submit" onClick={() => login()}>
           Login
         </button>
         <p className="login-signup-link">
