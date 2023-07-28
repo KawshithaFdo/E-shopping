@@ -45,8 +45,11 @@ h2 {
 
 .product-item h3 {
   margin: 10px 0;
+  color:black;
 }
 
 .product-item p {
   margin-bottom: 5px;
+  color:gold;
+
 }

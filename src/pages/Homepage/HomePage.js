@@ -116,7 +116,7 @@ const HomePage = ({ setCurrentPage }) => {
       <footer className="homepage-footer">
         <p>Contact us: support@mobileshop.com</p>
         <div className="homepage-buttons">
-          <button className="button" onClick={() => setCurrentPage("login")}>
+          <button className="button" onClick={() => setCurrentPage("dashboard")}>
             Login
           </button>
           <button className="button" onClick={() => setCurrentPage("signup")}>

@@ -18,7 +18,6 @@ const ItemModal = ({ isOpen, onRequestClose, item }) => {
         <h2>{item.name}</h2>
         <p>Description: {item.description}</p>
         <p>Price: ${item.price}</p>
-        <button onClick={() => onRequestClose()}>Close</button>
         <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
       </div>
     </Modal>
