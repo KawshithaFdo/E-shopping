@@ -1,21 +1,19 @@
 import React from "react";
 import "./UserProfile.css";
-import { useHistory } from "react-router-dom";
-
-const UserProfile = ({ setCurrentPage }) => {
+import DefaultUser from "../../assets/default_profile.png";
+const UserProfile = ({ setCurrentPage, user }) => {
   const handleGoBack = () => {
     setCurrentPage("dashboard");
   };
+  const dob = user.date_of_birth.split("T")[0];
 
-  // Dummy user data
-  const user = {
-    name: "John Doe",
-    dateOfBirth: "1985-07-15",
-    address: "123 Main Street, City",
-    email: "john.doe@example.com",
-    contacts: "123-456-7890",
-    // Add more fields for other user information
-    profileImageUrl: "https://dummyimage.com/200x200/ccc/fff", // Dummy profile image URL
+  const userInfo = {
+    name: user.username,
+    dateOfBirth: dob,
+    address: user.address,
+    email: user.email,
+    contacts: user.contact,
+    profileImageUrl: DefaultUser,
   };
 
   return (
@@ -26,29 +24,28 @@ const UserProfile = ({ setCurrentPage }) => {
           Go Back
         </button>
         <div className="profile-image">
-          <img src={user.profileImageUrl} alt="Profile" />
+          <img src={userInfo.profileImageUrl} alt="Profile" />
         </div>
         <div className="profile-section">
           <label>Name:</label>
-          <span>{user.name}</span>
+          <span>{userInfo.name}</span>
         </div>
         <div className="profile-section">
           <label>Date of Birth:</label>
-          <span>{user.dateOfBirth}</span>
+          <span>{userInfo.dateOfBirth}</span>
         </div>
         <div className="profile-section">
           <label>Address:</label>
-          <span>{user.address}</span>
+          <span>{userInfo.address}</span>
         </div>
         <div className="profile-section">
           <label>Email:</label>
-          <span>{user.email}</span>
+          <span>{userInfo.email}</span>
         </div>
         <div className="profile-section">
           <label>Contacts:</label>
-          <span>{user.contacts}</span>
+          <span>{userInfo.contacts}</span>
         </div>
-        {/* Add more fields for other information */}
       </div>
     </div>
   );

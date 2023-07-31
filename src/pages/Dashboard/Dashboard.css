@@ -39,17 +39,20 @@ h2 {
 }
 
 .product-item img {
-  max-width: 100%;
-  height: auto;
+  height: 50%;
 }
 
 .product-item h3 {
   margin: 10px 0;
-  color:black;
+  color: black;
+}
+
+.product-item h5 {
+  margin: 10px 0;
+  color: black;
 }
 
 .product-item p {
   margin-bottom: 5px;
-  color:gold;
-
+  color: gold;
 }

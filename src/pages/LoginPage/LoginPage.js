@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { addItem } from "../../store/slice/cartSlice";
 
-const LoginPage = ({ setCurrentPage }) => {
+const LoginPage = ({ setCurrentPage, setUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
 
   const handleEmailChange = (e) => {
     setUsername(e.target.value);
@@ -22,12 +19,13 @@ const LoginPage = ({ setCurrentPage }) => {
   };
 
   const login = async () => {
-    dispatch(addItem("HI Cart"));
     try {
       const response = await axios.post("http://localhost:5000/user/login", {
         username: username,
         password: password,
       });
+      const userInfo = response.data.userDetails;
+      setUser(userInfo);
       setCurrentPage("dashboard");
     } catch (error) {
       alert(error);
