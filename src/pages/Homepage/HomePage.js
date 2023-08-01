@@ -75,44 +75,46 @@ const HomePage = ({ setCurrentPage }) => {
         <h1>Welcome to Mobile Shop</h1>
         <p>Your one-stop shop for mobile phones!</p>
       </header>
-      <main className="homepage-main">
-        <section className="homepage-feature">
-          <h2>Latest Arrivals</h2>
-          <div className="latest-products-container">
-            {latestProducts.map((product) => (
-              <div key={product.id} className="product-item">
-                <img src={product.image} alt={product.name} />
-                <h3>{product.name}</h3>
-                <p>Price: ${product.price}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-        <section className="homepage-feature">
-          <h2>Best Sellers</h2>
-          <div className="latest-products-container">
-            {BestSeller.map((product) => (
-              <div key={product.id} className="product-item">
-                <img src={product.image} alt={product.name} />
-                <h3>{product.name}</h3>
-                <p>Price: ${product.price}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-        <section className="homepage-feature">
-          <h2>Special Offers</h2>
-          <div className="latest-products-container">
-            {SpecialOffers.map((product) => (
-              <div key={product.id} className="product-item">
-                <img src={product.image} alt={product.name} />
-                <h3>{product.name}</h3>
-                <p>Price: ${product.price}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      </main>
+      <div className="homepage-main">
+        <main >
+          <section className="homepage-feature">
+            <h2>Latest Arrivals</h2>
+            <div className="latest-products-container">
+              {latestProducts.map((product) => (
+                <div key={product.id} className="product-item">
+                  <img src={product.image} alt={product.name} />
+                  <h3>{product.name}</h3>
+                  <p>Price: ${product.price}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+          <section className="homepage-feature">
+            <h2>Best Sellers</h2>
+            <div className="latest-products-container">
+              {BestSeller.map((product) => (
+                <div key={product.id} className="product-item">
+                  <img src={product.image} alt={product.name} />
+                  <h3>{product.name}</h3>
+                  <p>Price: ${product.price}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+          <section className="homepage-feature">
+            <h2>Special Offers</h2>
+            <div className="latest-products-container">
+              {SpecialOffers.map((product) => (
+                <div key={product.id} className="product-item">
+                  <img src={product.image} alt={product.name} />
+                  <h3>{product.name}</h3>
+                  <p>Price: ${product.price}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </main>
+      </div>
       <footer className="homepage-footer">
         <p>Contact us: support@mobileshop.com</p>
         <div className="homepage-buttons">
