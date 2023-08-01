@@ -1,12 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Cart.css";
 import PaymentDetailsModal from "../PaymentMethods/PaymentModal";
+import axios from "axios";
+import DefaultImage from "../../assets/default.png";
+import NavBar from "../Dashboard/Navbar/Navbar";
 
-const CartScreen = () => {
-    const [isPaymentModalOpen, setPaymentModalOpen] = useState(false);
-    const [paymentData, setPaymentData] = useState(null);
+const CartScreen = ({ user, setCurrentPage }) => {
+  const [isPaymentModalOpen, setPaymentModalOpen] = useState(false);
+  const [paymentData, setPaymentData] = useState(null);
+  const [cart, setCart] = useState([]);
+  const [selectedShippingMethod, setSelectedShippingMethod] =
+    useState("standard");
 
-   const handleCheckout = () => {
+  useEffect(() => {
+    renderData();
+  }, []);
+
+  const renderData = async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:5000/cart/${user._id}`
+      );
+      setCart(response.data);
+    } catch (error) {
+      alert(error);
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handleCheckout = () => {
     setPaymentModalOpen(true);
   };
 
@@ -14,53 +36,57 @@ const CartScreen = () => {
     setPaymentModalOpen(false);
   };
 
-  const handlePayNow = (data) => {
+  const handlePayNow = async (data) => {
+    const total = getTotalPrice();
+    try {
+      const response = await axios.post("http://127.0.0.1:5000/order", {
+        userId: user._id,
+        totalAmount: total,
+        shipping: selectedShippingMethod,
+      });
+      setCurrentPage("dashboard");
+    } catch (error) {
+      alert(error);
+      console.error("Error fetching data:", error);
+    }
     setPaymentData(data);
-    // Perform payment processing here (e.g., API call)
-    // You can use the paymentData to send the card details to the backend
-    console.log('Payment data:', data);
+    console.log("Payment data:", data);
     handleClosePaymentModal();
   };
 
-  const cartItems = [
-    {
-      id: 1,
-      name: "Dummy Phone 1",
-      price: 399,
-      quantity: 1,
-      image: "https://dummyimage.com/200x200/ccc/fff",
-    },
-    {
-      id: 2,
-      name: "Dummy Phone 2",
-      price: 299,
-      quantity: 2,
-      image: "https://dummyimage.com/200x200/ccc/fff",
-    },
-    // Add more dummy cart items here...
-  ];
-
   const getTotalPrice = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
+    return cart.reduce(
+      (total, item) => total + item.itemDetails.price * item.qty,
       0
     );
   };
 
   return (
     <div className="cart-screen-container">
+      <NavBar
+        user={user.username}
+        profile={() => setCurrentPage("profile")}
+        cart={() => setCurrentPage("cart")}
+        logout={() => setCurrentPage("homepage")}
+        back={() => setCurrentPage("dashboard")}
+      />
       <h2>Your Cart</h2>
-      {cartItems.length === 0 ? (
+      {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
         <>
-          {cartItems.map((item) => (
+          {cart.map((item) => (
             <div key={item.id} className="cart-item">
-              <img src={item.image} alt={item.name} />
+              <img
+                src={
+                  item.itemDetails.image ? item.itemDetails.image : DefaultImage
+                }
+                alt={item.name}
+              />
               <div className="item-details">
-                <h3>{item.name}</h3>
-                <p>Price: ${item.price}</p>
-                <p>Quantity: {item.quantity}</p>
+                <h3>{item.itemDetails.name}</h3>
+                <p>Price: ${item.itemDetails.price}</p>
+                <p>Quantity: {item.qty}</p>
               </div>
             </div>
           ))}
@@ -72,10 +98,11 @@ const CartScreen = () => {
           </button>
         </>
       )}
-     <PaymentDetailsModal
+      <PaymentDetailsModal
         isOpen={isPaymentModalOpen}
         onClose={handleClosePaymentModal}
-        onPayNow={handlePayNow}
+        onPayNow={(data) => handlePayNow(data)}
+        onShipping={(data) => setSelectedShippingMethod(data)}
       />
     </div>
   );

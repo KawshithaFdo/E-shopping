@@ -1,6 +1,3 @@
-/* PaymentDetailsModal.css */
-
-/* Overlay styles */
 .payment-modal-overlay {
     position: fixed;
     top: 0;
@@ -14,7 +11,6 @@
     z-index: 999;
   }
   
-  /* Modal content styles */
   .payment-modal-content {
     background-color: #fff;
     padding: 20px;
@@ -24,13 +20,16 @@
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
+  .modal-container {
+    max-height: 80vh; 
+    overflow: auto;
+  }
   
   .payment-modal-content h2 {
     font-size: 24px;
     margin-bottom: 20px;
   }
   
-  /* Form group styles */
   .form-group {
     margin-bottom: 15px;
     text-align: left;
@@ -50,7 +49,6 @@
     border-radius: 5px;
   }
   
-  /* Button styles */
   button {
     padding: 10px 20px;
     font-size: 16px;

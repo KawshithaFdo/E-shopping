@@ -28,10 +28,19 @@ const Dashboard = ({ setCurrentPage, user }) => {
     setSelectedItem(item);
   };
 
-  const handleModalClose = (data) => {
-    setSelectedItem(null);
-    alert(data.quantity);
-    // add to cart
+  const handleModalClose = async (data) => {
+    try {
+      const response = await axios.post("http://127.0.0.1:5000/cart", {
+        userId: user._id,
+        itemId: data._id,
+        qty: data.quantity,
+      });
+      setSelectedItem(null);
+      renderData();
+    } catch (error) {
+      alert(error);
+      console.error("Error fetching data:", error);
+    }
   };
 
   return (
@@ -41,6 +50,7 @@ const Dashboard = ({ setCurrentPage, user }) => {
         profile={() => setCurrentPage("profile")}
         cart={() => setCurrentPage("cart")}
         logout={() => setCurrentPage("homepage")}
+        back={() => setCurrentPage("dashboard")}
       />
       <h1>Welcome To Our Store</h1>
       {itemTypes.map((type) => (
