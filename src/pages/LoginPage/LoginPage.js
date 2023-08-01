@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./LoginPage.css";
 import axios from "axios";
 
-const LoginPage = ({ setCurrentPage, setUser }) => {
+const LoginPage = ({ setCurrentPage, setUser, setAdmin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,8 +25,15 @@ const LoginPage = ({ setCurrentPage, setUser }) => {
         password: password,
       });
       const userInfo = response.data.userDetails;
-      setUser(userInfo);
-      setCurrentPage("dashboard");
+      const adminInfo = response.data.adminDetails;
+
+      if (response.data.type == "User") {
+        setCurrentPage("dashboard");
+        setUser(userInfo);
+      } else {
+        setCurrentPage("adminDashboard");
+        setAdmin(adminInfo);
+      }
     } catch (error) {
       alert(error);
       console.error("Error fetching data:", error);

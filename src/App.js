@@ -5,10 +5,11 @@ import SignupPage from "./pages/SignupPage/SignupPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import CartScreen from "./pages/Cart/Cart";
-
+import AdminDashboard from "./pages/Admin/Dashboard/AdminDashboard";
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
 
   const renderPage = () => {
     switch (currentPage) {
@@ -25,6 +26,7 @@ function App() {
           <LoginPage
             setCurrentPage={setCurrentPage}
             setUser={setUser}
+            setAdmin={setAdmin}
             user={user}
           />
         );
@@ -58,6 +60,14 @@ function App() {
             setCurrentPage={setCurrentPage}
             setUser={setUser}
             user={user}
+          />
+        );
+      case "adminDashboard":
+        return (
+          <AdminDashboard
+            setCurrentPage={setCurrentPage}
+            setAdmin={setAdmin}
+            admin={admin}
           />
         );
       default:
