@@ -4,7 +4,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import NavBar from "./Navbar/Navbar";
 import axios from "axios";
 import DefaultImage from "../../assets/default.png";
-const itemTypes = ["Apple", "Android", "Huawei", "Redmi", "Oppo"];
+const itemTypes = ["Apple", "Samsung", "Huawei", "Redmi", "Oppo"];
 
 const Dashboard = ({ setCurrentPage, user }) => {
   const [selectedItem, setSelectedItem] = useState(null);
