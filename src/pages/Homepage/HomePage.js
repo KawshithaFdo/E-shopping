@@ -72,11 +72,11 @@ const HomePage = ({ setCurrentPage }) => {
   return (
     <div className="homepage-container">
       <header className="homepage-header">
-        <h1>Welcome to Mobile Shop</h1>
+        <h1>Welcome to E-Mobile Shop</h1>
         <p>Your one-stop shop for mobile phones!</p>
       </header>
       <div className="homepage-main">
-        <main >
+        <main>
           <section className="homepage-feature">
             <h2>Latest Arrivals</h2>
             <div className="latest-products-container">
@@ -116,7 +116,7 @@ const HomePage = ({ setCurrentPage }) => {
         </main>
       </div>
       <footer className="homepage-footer">
-        <p>Contact us: support@mobileshop.com</p>
+        <p>Contact us: support@emobileshop.com</p>
         <div className="homepage-buttons">
           <button className="button" onClick={() => setCurrentPage("login")}>
             Login
